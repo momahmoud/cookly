@@ -48,5 +48,6 @@ class ImagesConstants {
   static const String receipt = 'Receipt';
   static const String user = 'User';
   static const String google = 'google';
+  static const String discount = 'Percent';
   static const String checkCircle = 'Check-circle';
 }

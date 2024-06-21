@@ -12,10 +12,8 @@ FoodModel _$FoodModelFromJson(Map<String, dynamic> json) => FoodModel(
       description: json['description'] as String?,
       price: (json['price'] as num?)?.toDouble(),
       id: json['id'] as int?,
-      category: (json['category'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
       isFavorite: json['is_favorite'] as bool?,
+      categoryName: json['category_name'] as String?,
     );
 
 Map<String, dynamic> _$FoodModelToJson(FoodModel instance) => <String, dynamic>{
@@ -24,6 +22,6 @@ Map<String, dynamic> _$FoodModelToJson(FoodModel instance) => <String, dynamic>{
       'description': instance.description,
       'price': instance.price,
       'id': instance.id,
-      'category': instance.category,
+      'category_name': instance.categoryName,
       'is_favorite': instance.isFavorite,
     };

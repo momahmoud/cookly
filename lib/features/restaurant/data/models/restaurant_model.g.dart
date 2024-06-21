@@ -12,10 +12,10 @@ RestaurantModel _$RestaurantModelFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       image: json['image'] as String?,
       description: json['description'] as String?,
-      savingOffer: json['saving_offer'] as String?,
+      discount: json['discount'],
       distance: json['distance'] as String?,
       location: json['location'] as String?,
-      rating: (json['rating'] as num?)?.toDouble(),
+      rate: (json['rate'] as num?)?.toDouble(),
       reviewsCount: json['reviews_count'] as int?,
       categories: (json['categories'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -40,6 +40,7 @@ RestaurantModel _$RestaurantModelFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String?,
       restaurantType: json['restaurant_type'] as String?,
       time: json['time'] as String?,
+      promoCode: json['promo_code'] as String?,
     );
 
 Map<String, dynamic> _$RestaurantModelToJson(RestaurantModel instance) =>
@@ -48,10 +49,11 @@ Map<String, dynamic> _$RestaurantModelToJson(RestaurantModel instance) =>
       'name': instance.name,
       'image': instance.image,
       'description': instance.description,
-      'saving_offer': instance.savingOffer,
+      'discount': instance.discount,
+      'promo_code': instance.promoCode,
       'distance': instance.distance,
       'location': instance.location,
-      'rating': instance.rating,
+      'rate': instance.rate,
       'reviews_count': instance.reviewsCount,
       'categories': instance.categories,
       'foods': instance.foods,

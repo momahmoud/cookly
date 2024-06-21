@@ -1,19 +1,22 @@
-import 'package:cookly/features/bottom_navbar/cubit/bottom_navbar_cubit.dart';
-import 'package:cookly/features/bottom_navbar/presentation/bottom_nav_bar.dart';
-import 'package:cookly/features/categories/presentation/screens/categories_screen.dart';
-import 'package:cookly/features/forget_password/cubit/forget_password_cubit.dart';
-import 'package:cookly/features/forget_password/presentation/forget_password_screen.dart';
-import 'package:cookly/features/home/cubit/home_cubit.dart';
-import 'package:cookly/features/restaurant/presentation/view/restaurant_screen.dart';
+import 'package:cookly/features/restaurant/data/models/restaurant_model.dart';
+import 'package:cookly/features/restaurant/presentation/cubit/restaurant_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/bottom_navbar/cubit/bottom_navbar_cubit.dart';
+import '../../features/bottom_navbar/presentation/bottom_nav_bar.dart';
+import '../../features/categories/cubit/categories_cubit.dart';
+import '../../features/categories/presentation/screens/categories_screen.dart';
+import '../../features/forget_password/cubit/forget_password_cubit.dart';
+import '../../features/forget_password/presentation/forget_password_screen.dart';
+import '../../features/home/cubit/home_cubit.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/login/cubit/login_cubit.dart';
 import '../../features/login/presentation/login_screen.dart';
 import '../../features/onboarding/cubit/onboarding_cubit.dart';
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
+import '../../features/restaurant/presentation/view/restaurant_screen.dart';
 import '../di/dependency_injection.dart';
 import '../theme/colors.dart';
 import 'routes.dart';
@@ -75,7 +78,7 @@ class AppRouter {
                 create: (context) => getIt<BottomNavbarCubit>(),
               ),
               BlocProvider(
-                create: (context) => getIt<HomeCubit>()..getCategories(),
+                create: (context) => getIt<HomeCubit>()..fetchHomePageData(),
               ),
             ],
             child: const BottomNavBar(),
@@ -84,12 +87,24 @@ class AppRouter {
 
       case Routes.restaurantScreen:
         return MaterialPageRoute(
-          builder: (_) => const RestaurantScreen(),
+          builder: (_) {
+            final RestaurantModel restaurantModel =
+                settings.arguments as RestaurantModel;
+            return BlocProvider(
+              create: (context) => getIt<RestaurantCubit>(),
+              child: RestaurantScreen(
+                restaurantModel: restaurantModel,
+              ),
+            );
+          },
         );
 
       case Routes.categoriesScreen:
         return MaterialPageRoute(
-          builder: (_) => const CategoriesScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => getIt<CategoriesCubit>()..getCategories(),
+            child: const CategoriesScreen(),
+          ),
         );
 
       default:

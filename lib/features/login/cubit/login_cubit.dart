@@ -1,6 +1,7 @@
 import 'package:cookly/features/login/data/repo/login_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../data/models/login_request_body.dart';
 import 'login_state.dart';
@@ -16,18 +17,19 @@ class LoginCubit extends Cubit<LoginState> {
   void login() async {
     if (formKey.currentState!.validate()) {
       emit(const LoginState.loading());
-      final response = await _loginRepo.login(
-        LoginRequestBody(
-          email: emailController.text,
-          password: passwordController.text,
-        ),
-      );
-
-      response.when(
-        success: (data) => emit(LoginState.success(data.user)),
-        failure: (error) =>
-            emit(LoginState.error(error: error.apiErrorModel.message ?? "")),
-      );
+      try {
+        final response = await _loginRepo.login(
+          LoginRequestBody(
+            email: emailController.text,
+            password: passwordController.text,
+          ),
+        );
+        emit(LoginState.success(response));
+      } on AuthException catch (e) {
+        emit(LoginState.error(error: e.message));
+      } catch (e) {
+        emit(LoginState.error(error: e.toString()));
+      }
     }
   }
 

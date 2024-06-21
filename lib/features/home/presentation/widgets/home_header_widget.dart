@@ -19,7 +19,7 @@ class HomeHeaderWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 200.h,
-      padding: EdgeInsets.symmetric(horizontal: 35.w, vertical: 8),
+      padding: EdgeInsets.symmetric(horizontal: 35.w, vertical: 8.h),
       decoration: BoxDecoration(
         color: ColorsManger.neutralColor00,
         borderRadius: BorderRadius.only(
@@ -75,7 +75,7 @@ class HomeHeaderWidget extends StatelessWidget {
               Container(
                 height: 40.h,
                 width: 82.w,
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h),
+                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
                 decoration: BoxDecoration(
                   color: ColorsManger.neutralColor20,
                   borderRadius: BorderRadius.circular(15.r),
@@ -101,7 +101,7 @@ class HomeHeaderWidget extends StatelessWidget {
               ),
             ],
           ),
-          verticalSpacing(10.h),
+          verticalSpacing(10),
           Container(
             height: 5.h,
             width: 40.w,

@@ -2,17 +2,29 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../models/restaurant_model.dart';
 
-class RestaurantRepo {
-  final SupabaseClient _supabaseClient;
+abstract class RestaurantsRepository {
+  Future<List<RestaurantModel>> fetchRestaurants();
+  Future<RestaurantModel> fetchRestaurantById(int id);
+}
 
-  RestaurantRepo(this._supabaseClient);
-  Future<RestaurantModel> getRestaurant() async {
-    try {
-      final response =
-          await _supabaseClient.from('restaurants').select().single();
-      return RestaurantModel.fromJson(response);
-    } catch (e) {
-      throw Exception(e);
-    }
+class RestaurantRepoImpl implements RestaurantsRepository {
+  final SupabaseClient _supabaseClient;
+  RestaurantRepoImpl(this._supabaseClient);
+  @override
+  Future<List<RestaurantModel>> fetchRestaurants() async {
+    final response = await _supabaseClient
+        .from('restaurants')
+        .select('*, rest_cat(*), foods(*), reviews(*)');
+    print(response);
+    return (response as List).map((e) => RestaurantModel.fromJson(e)).toList();
+  }
+
+  @override
+  Future<RestaurantModel> fetchRestaurantById(int id) async {
+    final response = await _supabaseClient
+        .from('restaurants')
+        .select('*,  foods(*)')
+        .eq('id', id);
+    return RestaurantModel.fromJson(response.first);
   }
 }

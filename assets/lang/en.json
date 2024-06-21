@@ -73,5 +73,13 @@
   "vibrate": "Vibrate",
   "notificationFromDocNow": "Notification from DocNow",
   "appUpdates": "App Updates",
-  "specialOffers": "Special Offers"
+  "specialOffers": "Special Offers",
+
+  "review": "Review",
+  "rating": "Rating",
+  "reviews": "Reviews",
+  "delivery": "Delivery",
+  "popularItems": "Popular Items",
+  "hotBurgersCombo": "Hot Burgers Combo",
+  "friedChicken": "Fried Chicken"
 }

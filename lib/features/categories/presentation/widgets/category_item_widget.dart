@@ -21,7 +21,7 @@ class CategoryItemWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 100.h,
+          height: 97.h,
           width: 100.h,
           padding: EdgeInsets.all(26.w),
           decoration: const BoxDecoration(
@@ -31,13 +31,10 @@ class CategoryItemWidget extends StatelessWidget {
           child: category.image!.endsWith('.svg')
               ? CustomSvgImageNetwork(
                   imageName: category.image,
-                  height: 100.h,
-                  width: 100.h,
+                  fit: BoxFit.cover,
                 )
               : CustomCachedNetworkImage(
                   imageName: category.image,
-                  height: 116.h,
-                  width: 205.h,
                   fit: BoxFit.cover,
                 ),
         ),

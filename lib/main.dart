@@ -2,10 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -20,10 +18,7 @@ void main() async {
   await SharedPreferencesService.getInstance();
   await ScreenUtil.ensureScreenSize();
   await setupGetIt();
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarBrightness: Brightness.light,
-    statusBarIconBrightness: Brightness.dark,
-  ));
+
   Bloc.observer = MyCubitObserver();
   await Supabase.initialize(
     url: dotenv.env['BASE_URL'] ?? '',
@@ -31,7 +26,7 @@ void main() async {
     debug: true,
   );
 
-  runApp(const ProviderScope(child: CooklyApp()));
+  runApp(const CooklyApp());
 }
 
 class MyCubitObserver extends BlocObserver {

@@ -1,4 +1,5 @@
 import 'package:cookly/core/helper_widgets/toast_messages.dart';
+import 'package:cookly/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,12 +41,11 @@ class LoginFormWidget extends StatelessWidget {
             );
           },
           success: (loginResponse) {
-            context.pop();
             ToastMessages.showToastMessage(
               msg: StringsConstants.loginSuccess.tr(context)!,
               state: ToastStates.SUCCESS,
             );
-            // context.pushNamed(Routes.homeScreen);
+            context.pushNamed(Routes.mainScreen);
           },
           error: (error) {
             context.pop();
@@ -117,7 +117,9 @@ class LoginFormWidget extends StatelessWidget {
                 color: ColorsManger.redColor400,
                 height: 44.h,
                 radius: 15.r,
-                onTap: () => cubit.login(),
+                onTap: () {
+                  cubit.login();
+                },
               ),
             ],
           ),

@@ -5,15 +5,16 @@ part 'review_model.g.dart';
 @JsonSerializable()
 class ReviewModel {
   final int? id;
-  final String? name;
+  final String? username;
   final String? image;
   final String? description;
+  @JsonKey(name: 'created_at')
   final String? time;
   final double? rating;
 
   ReviewModel({
     this.id,
-    this.name,
+    this.username,
     this.image,
     this.description,
     this.time,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -56,7 +55,7 @@ class _CooklyAppState extends State<CooklyApp> {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
-      minTextAdapt: true,
+      // minTextAdapt: true,
       builder: (context, child) {
         return BlocProvider(
           create: (context) => LocaleCubit()..getSavedLocale(),
@@ -79,14 +78,14 @@ class _CooklyAppState extends State<CooklyApp> {
                 title: 'Cookly App',
                 theme: ThemeData(
                   fontFamily: "DMSans",
-                  appBarTheme: const AppBarTheme(
-                    systemOverlayStyle: SystemUiOverlayStyle(
-                      statusBarColor: ColorsManger.primaryColor500,
-                      statusBarBrightness: Brightness.light,
-                      statusBarIconBrightness: Brightness.dark,
-                    ),
-                    elevation: 0,
-                  ),
+                  // appBarTheme: const AppBarTheme(
+                  //   systemOverlayStyle: SystemUiOverlayStyle(
+                  //     statusBarColor: ColorsManger.neutralColor00,
+                  //     statusBarBrightness: Brightness.light,
+                  //     statusBarIconBrightness: Brightness.dark,
+                  //   ),
+                  //   elevation: 0,
+                  // ),
                   primaryColor: ColorsManger.primaryColor500,
                 ),
                 onGenerateRoute: AppRouter.generateRoute,

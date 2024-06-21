@@ -12,11 +12,12 @@ class RestaurantModel {
   final String? name;
   final String? image;
   final String? description;
-  @JsonKey(name: 'saving_offer')
-  final String? savingOffer;
+  final dynamic discount;
+  @JsonKey(name: 'promo_code')
+  final String? promoCode;
   final String? distance;
   final String? location;
-  final double? rating;
+  final double? rate;
   @JsonKey(name: 'reviews_count')
   final int? reviewsCount;
   final List<String>? categories;
@@ -25,7 +26,7 @@ class RestaurantModel {
   @JsonKey(name: 'is_verified')
   final bool? isVerified;
   final List<FeatureModel> features;
-  final List<ReviewModel> reviews;
+  final List<ReviewModel>? reviews;
   final List<String>? images;
   final double? latitude;
   final double? longitude;
@@ -39,10 +40,10 @@ class RestaurantModel {
     this.name,
     this.image,
     this.description,
-    this.savingOffer,
+    this.discount,
     this.distance,
     this.location,
-    this.rating,
+    this.rate,
     this.reviewsCount,
     this.categories,
     this.foods,
@@ -56,6 +57,7 @@ class RestaurantModel {
     this.status,
     this.restaurantType,
     this.time,
+    this.promoCode,
   });
 
   factory RestaurantModel.fromJson(Map<String, dynamic> json) =>

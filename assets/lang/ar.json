@@ -69,5 +69,13 @@
   "vibrate": "الاهتزاز",
   "notificationFromDocNow": "اشعار من DocNow",
   "appUpdates": "تحديثات التطبيق",
-  "specialOffers": "عروض خاصة"
+  "specialOffers": "عروض خاصة",
+
+  "review": "مراجعة",
+  "rating": "تقييم",
+  "reviews": "تقييمات",
+  "delivery": "توصيل",
+  "popularItems": "العناصر الشائيرة",
+  "hotBurgersCombo": "منتجات برغر",
+  "friedChicken": "دجاج فريدة"
 }

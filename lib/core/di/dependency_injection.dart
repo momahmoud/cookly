@@ -2,15 +2,16 @@
 import 'package:cookly/features/bottom_navbar/cubit/bottom_navbar_cubit.dart';
 import 'package:cookly/features/categories/cubit/categories_cubit.dart';
 import 'package:cookly/features/categories/data/repo/categories_repo.dart';
+import 'package:cookly/features/restaurant/data/repo/restaurant_repo.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../features/forget_password/cubit/forget_password_cubit.dart';
 import '../../features/home/cubit/home_cubit.dart';
-import '../../features/home/data/repo/home_repo.dart';
 import '../../features/login/cubit/login_cubit.dart';
 import '../../features/login/data/repo/login_repo.dart';
 import '../../features/onboarding/cubit/onboarding_cubit.dart';
+import '../../features/restaurant/presentation/cubit/restaurant_cubit.dart';
 import '../networking/supabase_factory.dart';
 // import '../networking/dio_factory.dart';
 
@@ -39,18 +40,25 @@ Future<void> setupGetIt() async {
   // // forget_password
   getIt.registerLazySingleton<ForgetPasswordCubit>(() => ForgetPasswordCubit());
 
-  // // home
-  getIt
-      .registerLazySingleton<HomeRepo>(() => HomeRepo(getIt<SupabaseClient>()));
-  getIt.registerLazySingleton<HomeCubit>(() => HomeCubit(getIt<HomeRepo>()));
-  getIt.registerLazySingleton<BottomNavbarCubit>(() => BottomNavbarCubit());
-
   //------------------ Categories --------------------------------//
-
-  getIt.registerLazySingleton<CategoriesRepo>(
-      () => CategoriesRepo(getIt<SupabaseClient>()));
+  getIt.registerLazySingleton<CategoriesRepoImpl>(
+      () => CategoriesRepoImpl(getIt<SupabaseClient>()));
   getIt.registerFactory<CategoriesCubit>(
-      () => CategoriesCubit(getIt<CategoriesRepo>()));
+      () => CategoriesCubit(getIt<CategoriesRepoImpl>()));
+
+  //------------------ Restaurants --------------------------------//
+
+  getIt.registerLazySingleton<RestaurantRepoImpl>(
+      () => RestaurantRepoImpl(getIt<SupabaseClient>()));
+  getIt.registerFactory<RestaurantCubit>(
+      () => RestaurantCubit(getIt<RestaurantRepoImpl>()));
+
+  // // home
+  getIt.registerLazySingleton<HomeCubit>(() => HomeCubit(
+        getIt<CategoriesRepoImpl>(),
+        getIt<RestaurantRepoImpl>(),
+      ));
+  getIt.registerLazySingleton<BottomNavbarCubit>(() => BottomNavbarCubit());
 
   // // main
   // getIt.registerLazySingleton<MainCubit>(() => MainCubit());

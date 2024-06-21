@@ -1,24 +1,25 @@
-import 'package:cookly/core/helper_widgets/custom_text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RestaurantScreen extends ConsumerStatefulWidget {
-  const RestaurantScreen({super.key});
+import '../../../../core/theme/colors.dart';
+import '../../data/models/restaurant_model.dart';
+import 'widgets/body_sliver_box_widget.dart';
+import 'widgets/header_sliver_app_bar_widget.dart';
 
-  @override
-  ConsumerState<RestaurantScreen> createState() => _RestaurantScreenState();
-}
+class RestaurantScreen extends StatelessWidget {
+  final RestaurantModel restaurantModel;
+  const RestaurantScreen({super.key, required this.restaurantModel});
 
-class _RestaurantScreenState extends ConsumerState<RestaurantScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CustomText('Restaurant Screen'),
-          ],
-        ),
+    return Scaffold(
+      backgroundColor: ColorsManger.neutralColor00,
+      extendBodyBehindAppBar: false,
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: <Widget>[
+          HeaderSliverAppBarWidget(restaurantModel: restaurantModel),
+          BodySliverBoxWidget(restaurantModel: restaurantModel),
+        ],
       ),
     );
   }

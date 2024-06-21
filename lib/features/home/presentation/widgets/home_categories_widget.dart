@@ -1,5 +1,6 @@
 import 'package:cookly/core/routing/routes.dart';
 import 'package:cookly/core/utils/extensions.dart';
+import 'package:cookly/features/categories/data/models/category_model.dart';
 import 'package:cookly/features/categories/presentation/widgets/categories_grid_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -11,7 +12,7 @@ import '../../../../core/helper_widgets/section_title_with_see_all_widget.dart';
 import '../../../../core/theme/colors.dart';
 
 class HomeCategoriesWidget extends StatelessWidget {
-  final List<dynamic> categories;
+  final List<CategoryModel> categories;
   const HomeCategoriesWidget({super.key, required this.categories});
 
   @override
@@ -38,11 +39,12 @@ class HomeCategoriesWidget extends StatelessWidget {
           CustomDividerWidget(
             margin: EdgeInsets.symmetric(vertical: 15.h),
           ),
-          const Expanded(
+          Expanded(
             child: CategoriesGridWidget(
               crossAxisCount: 1,
               scrollDirection: Axis.horizontal,
               childAspectRatio: 1.1,
+              categories: categories,
             ),
           )
         ],

@@ -1,5 +1,6 @@
 import 'package:cookly/core/constants/images_constants.dart';
 import 'package:cookly/core/helper_widgets/custom_rating_widget.dart';
+import 'package:cookly/features/restaurant/data/models/restaurant_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,8 +12,8 @@ import '../../../../core/theme/styles_manager.dart';
 import '../../../../core/utils/spacing.dart';
 
 class HomeBestPartnerItemWidget extends StatelessWidget {
-  final dynamic partner;
-  const HomeBestPartnerItemWidget({super.key, this.partner});
+  final RestaurantModel partner;
+  const HomeBestPartnerItemWidget({super.key, required this.partner});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class HomeBestPartnerItemWidget extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(15.r),
           child: CustomCachedNetworkImage(
-            imageName: partner['image'],
+            imageName: partner.image,
             height: 116.h,
             width: 205.h,
             fit: BoxFit.cover,
@@ -39,7 +40,7 @@ class HomeBestPartnerItemWidget extends StatelessWidget {
                 children: [
                   Flexible(
                     child: CustomText(
-                      partner['name'],
+                      partner.name,
                       style: getSemiBoldStyle(
                         color: ColorsManger.neutralColor800,
                         fontSize: 20.sp,
@@ -49,17 +50,18 @@ class HomeBestPartnerItemWidget extends StatelessWidget {
                     ),
                   ),
                   horizontalSpacing(2),
-                  const CustomSvgImage(
-                    imageName: ImagesConstants.shieldCheck,
-                    color: ColorsManger.greenColor400,
-                  )
+                  if (partner.isVerified!)
+                    const CustomSvgImage(
+                      imageName: ImagesConstants.shieldCheck,
+                      color: ColorsManger.greenColor400,
+                    )
                 ],
               ),
               verticalSpacing(4),
               Row(
                 children: [
                   CustomText(
-                    partner['status'],
+                    partner.status,
                     style: getSemiBoldStyle(
                       color: ColorsManger.greenColor400,
                       fontSize: 12.sp,
@@ -68,7 +70,7 @@ class HomeBestPartnerItemWidget extends StatelessWidget {
                   const CustomCircleDotWidget(),
                   Flexible(
                     child: CustomText(
-                      partner['location'],
+                      partner.location,
                       style: getMediumStyle(
                         color: ColorsManger.neutralColor100,
                         fontSize: 12.sp,
@@ -82,23 +84,30 @@ class HomeBestPartnerItemWidget extends StatelessWidget {
               verticalSpacing(12),
               Row(
                 children: [
-                  CustomRatingWidget(rating: partner['rate']),
+                  CustomRatingWidget(rating: partner.rate ?? 0.0),
                   const CustomCircleDotWidget(),
                   CustomText(
-                    partner['distance'],
+                    partner.distance,
                     style: getMediumStyle(
                       color: ColorsManger.neutralColor800,
                       fontSize: 12.sp,
                     ),
                   ),
-                  const CustomCircleDotWidget(),
-                  CustomText(
-                    partner["features"][0]['name'],
-                    style: getMediumStyle(
-                      color: ColorsManger.neutralColor800,
-                      fontSize: 12.sp,
+                  if (partner.features.isNotEmpty)
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CustomCircleDotWidget(),
+                        CustomText(
+                          partner.features[0].name,
+                          style: getMediumStyle(
+                            color: ColorsManger.neutralColor800,
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
                 ],
               ),
             ],

@@ -126,6 +126,9 @@ class CustomCachedNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FancyShimmerImage(
+      boxDecoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(0),
+      ),
       imageUrl: imageName!,
       shimmerBackColor: ColorsManger.neutralColor30,
       shimmerBaseColor: ColorsManger.neutralColor30,

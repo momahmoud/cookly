@@ -93,4 +93,11 @@ class StringsConstants {
   static const String vibrate = 'vibrate';
   static const String appUpdates = 'appUpdates';
   static const String specialOffers = 'specialOffers';
+
+  //restaurant page
+  static const String reviews = 'reviews';
+  static const String delivery = 'delivery';
+  static const String popularItems = 'popularItems';
+  static const String hotBurgersCombo = 'hotBurgersCombo';
+  static const String friedChicken = 'friedChicken';
 }

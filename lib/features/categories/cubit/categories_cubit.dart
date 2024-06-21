@@ -8,18 +8,18 @@ part 'categories_state.dart';
 part 'categories_cubit.freezed.dart';
 
 class CategoriesCubit extends Cubit<CategoriesState> {
-  final CategoriesRepo _categoriesRepo;
+  final CategoriesRepoImpl _categoriesRepo;
   CategoriesCubit(
     this._categoriesRepo,
   ) : super(const CategoriesState.initial());
 
   Future<void> getCategories() async {
     emit(const CategoriesState.loading());
-    final response = await _categoriesRepo.getCategories();
-    response.when(
-      success: (data) => emit(CategoriesState.success(data)),
-      failure: (failure) =>
-          emit(CategoriesState.failure(failure.apiErrorModel.message ?? '')),
-    );
+    final response = await _categoriesRepo.fetchCategories();
+    try {
+      emit(CategoriesState.success(response));
+    } catch (e) {
+      emit(CategoriesState.failure(e.toString()));
+    }
   }
 }

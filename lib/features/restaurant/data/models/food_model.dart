@@ -9,9 +9,10 @@ class FoodModel {
   final String? description;
   final double? price;
   final int? id;
-  final List<String>? category;
+  @JsonKey(name: 'category_name')
+  final String? categoryName;
   @JsonKey(name: 'is_favorite')
-  final bool? isFavorite;
+  bool? isFavorite;
 
   FoodModel({
     this.name,
@@ -19,8 +20,8 @@ class FoodModel {
     this.description,
     this.price,
     this.id,
-    this.category,
     this.isFavorite,
+    this.categoryName,
   });
 
   factory FoodModel.fromJson(Map<String, dynamic> json) =>
