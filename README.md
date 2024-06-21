@@ -14,5 +14,13 @@ This Flutter application is designed to provide users with a convenient way to e
 
 - User Profiles: Users can create personalized profiles within the app, enabling them to save favorite foods, bookmark restaurants, and track their dining history.
 
-![Home Page](./assets/screenshots/home.png) ![Categories Page](./assets/screenshots/categories.png)
-![Restaurant Page](./assets/screenshots/restaurant.png) ![](./assets/screenshots/restaurant-delivery.png) ![](./assets/screenshots/reviews.png)
+<div style="display: flex; justify-content: space-between;">
+  <img src="./assets/screenshots/home.png" alt="Home Page" width="400" />
+  <img src="./assets/screenshots/categories.png" alt="Categories Page" width="400" />
+</div>
+<div style="display: flex; justify-content: space-between;">
+  <img src="./assets/screenshots/restaurant.png" alt="Restaurant Page" width="400" />
+  <img src="./assets/screenshots/restaurant-delivery.png" alt="Restaurant Page" width="400" />
+  <img src="./assets/screenshots/reviews.png" alt="Restaurant Page" width="400" />
+</div>
+
